@@ -1,0 +1,33 @@
+function splitChannels(filename)
+    im = imread(filename);
+    imshow(im);
+    red = im[:,:,1];
+    green = im[:,:,2];
+    blue = im[:,:,3];
+    return red, green, blue
+end
+
+function comparisonGraph(filename)
+    im = imread(filename);
+    red,green,blue = splitChannels(filename);
+    image2 = zeros(360,640,3);
+    image2[:,:,1] = green;
+    image2[:,:,2] = blue;
+    image2[:,:,3] = red;
+    figure(figsize=[20,20]);
+    subplot(1,2,1);
+    title("Original")
+    imshow(im);
+    subplot(1,2,2);
+    title("Swapped Channels")
+    imshow(image2);
+    savefig("Comparison Image.png")
+end
+
+function circularMotion(filename, p)
+    im = imread(filename);
+    red = copy(im[:,:,1]);
+    changed = circshift(red,(p,0));
+    im[:,:,1] = changed;
+    return changed
+end
