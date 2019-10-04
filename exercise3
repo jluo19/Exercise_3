@@ -28,6 +28,5 @@ function circularMotion(filename, p)
     im = imread(filename);
     red = copy(im[:,:,1]);
     changed = circshift(red,(p,0));
-    im[:,:,1] = changed;
     return changed
 end
